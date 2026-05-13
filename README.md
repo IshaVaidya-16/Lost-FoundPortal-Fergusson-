@@ -1,4 +1,4 @@
-# Lost & Found Portal — Fergusson College
+# Lost & Found Portal  (Fergusson College)
 
 A web-based Lost and Found Portal developed for Fergusson College, Pune. 
 Students can register, report lost items, register found items, 
@@ -28,4 +28,4 @@ search for lost items and mark items as resolved.
 4. Run the project using Visual Studio or dotnet CLI
 
 ## Database
-Uses MySQL with three tables — user, lost_items, found_items
+Uses MySQL with three tables: user, lost_items, found_items.
