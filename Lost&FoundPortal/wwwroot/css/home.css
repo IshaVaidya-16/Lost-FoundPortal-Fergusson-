@@ -1,0 +1,282 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f5f5;
+}
+
+.navbar {
+    background: #1a1a2e;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+}
+
+.nav-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+    .logo span {
+        color: #e94560;
+    }
+
+.menu {
+    display: flex;
+    gap: 15px;
+}
+
+    .menu a {
+        color: #ccc;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+    }
+
+        .menu a:hover {
+            background: #e94560;
+            color: white;
+        }
+
+.login-btn {
+    background: #e94560;
+    color: white !important;
+    border-radius: 20px;
+}
+    .login-btn:hover {
+        background-color: #bc1832;
+    }
+
+.hero {
+    position: relative;
+    height: 700px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    
+}
+
+.hero-bg {
+    position: absolute;
+    inset: -50px;
+    background: url('/images/FC-front-sketch.png') center 30%/cover no-repeat;
+    transform: rotate(-1deg) scale(1.1);
+    transform-origin: center;
+    z-index: 0;
+}
+
+    .hero-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+    }
+
+.hero-text {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    text-shadow: 2px 1px 3px #e94560;
+}
+
+.hero span {
+    color: #e94560;
+}
+
+.hero p {
+    margin: 15px 0px 40px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.hero-btn {
+    background: #e94560;
+    padding: 12px 25px;
+    border-radius: 25px;
+    color: white;
+    text-decoration: none;
+    margin-top: 40px;
+    font-weight:500;
+}
+    .hero-btn:hover {
+        background-color: #bc1832;
+    }
+
+.actions {
+    padding: 60px 20px;
+    text-align: center;
+    background: white;
+}
+.subtext {
+    color: #777;
+    font-weight: 600;
+    margin-bottom: 40px;
+    font-size: 14px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #f9f9f9;
+    padding: 30px;
+    width: 280px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+    .card h4 {
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        margin-bottom: 20px;
+        color: #555;
+    }
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.red {
+    background: #e94560;
+}
+
+.dark {
+    background: #1a1a2e;
+}
+    .stats {
+        background: #1a1a2e;
+        color: white;
+        padding: 50px 20px;
+    }
+
+    .stats-box {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .stat h3 {
+        color: #e94560;
+        font-size: 36px;
+    }
+
+    .stat p {
+        color: #ccc;
+    }
+
+    .about {
+        padding: 60px 20px;
+        background: #eef1f5;
+    }
+
+    .about-box {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .about-text {
+        flex: 1;
+    }
+
+    .about-info {
+        flex: 1;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .line {
+        width: 50px;
+        height: 4px;
+        background: #e94560;
+        margin: 10px 0;
+    }
+
+    .steps {
+        padding: 70px 20px;
+        text-align: center;
+        background: white;
+    }
+
+    .step-box {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .step {
+        width: 250px;
+    }
+
+    .num {
+        background: #e94560;
+        color: white;
+        width: 50px;
+        height: 50px;
+        margin: auto;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom:20px;
+    }
+
+    .footer {
+        background: #0f0f1a;
+        color: #aaa;
+        text-align: center;
+        padding: 20px;
+    }
+
+     .footer span {
+            color: #e94560;
+        }
+
+    @media (max-width: 768px) {
+        .menu {
+            flex-direction: column;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+        }
+
+        .stats-box {
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .about-box {
+            flex-direction: column;
+        }
+    }

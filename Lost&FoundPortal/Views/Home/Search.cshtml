@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Search";
+    var results = ViewBag.SearchResults as List<Lost_FoundPortal.Models.LostItem>;
+    var users = ViewBag.Users as List<Lost_FoundPortal.Models.Student>;
+    string query = ViewBag.Query ?? "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Search Lost Items</title>
+    <style>
+        button:hover
+        {
+            background-color:#bc1832;
+        }
+    </style>
+</head>
+<body>
+
+   
+    <div style="background:#1a1a2e; color:white; padding:15px 20px; display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="margin:0;">Search Lost Items</h2>
+        <a href="/Home/Index" style="color:white; text-decoration:none;">← Back</a>
+    </div>
+
+    <div style="background:white; margin:30px auto; padding:30px; border-radius:12px; max-width:700px; box-shadow:0 5px 20px rgba(0,0,0,0.1);">
+        <h4 style="margin-bottom:10px">Search Items here</h4>
+        <form method="post" asp-action="Search" style="display:flex; gap:10px;">
+            <input type="text" name="query" value="@query" placeholder="Search by item name or location..."
+                   style="flex:1; padding:12px; border:1px solid #ccc; border-radius:8px; font-size:14px; outline:none;" />
+            <button type="submit"
+                    style="padding:12px 24px; background:#e94560; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">
+                Search
+            </button>
+        </form>
+    </div>
+    <div style="max-width:700px; margin:0 auto; padding:0 20px;">
+
+        @if (results != null)
+        {
+            if (results.Any())
+            {
+                <h3 style="color:#1a1a2e; margin-bottom:15px;">Results for "@query"</h3>
+
+                @foreach (var item in results)
+                {
+                    <div style="display:flex; gap:15px; background:white; padding:15px; margin-bottom:12px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.08);">
+
+                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                        {
+                            <img src="@item.ImagePath" style="width:100px; height:100px; object-fit:cover; border-radius:8px;" />
+                        }
+                        else
+                        {
+                            <img src="/images/default.jpg" style="width:100px; height:100px; object-fit:cover; border-radius:8px;" />
+                        }
+
+                        <div>
+                            <h4 style="margin:0 0 6px; color:#1a1a2e;">@item.ItemName</h4>
+                            <p style="margin:0 0 4px; color:#555;">@item.Description</p>
+                            <p style="margin:0 0 4px;"><b>Location:</b> @item.LocationLost</p>
+                            <p style="margin:0 0 4px;"><b>Lost on:</b> @item.DateLost?.ToString("dd MMM yyyy")</p>
+                            <p style="margin:0 0 8px;"><b>Lost By:</b> @users?.FirstOrDefault(u => u.UserId == item.UserId)?.FullName</p>
+                            <span style="display:inline-block; padding:4px 12px; background:@(item.Status == "resolved" ? "green" : "#e94560"); color:white; border-radius:5px; font-size:12px;">
+                                @item.Status
+                            </span>
+                        </div>
+
+                    </div>
+                }
+            }
+            else
+            {
+                <p style="color:#888; text-align:center; margin-top:20px;">No items found matching "@query"</p>
+            }
+        }
+        else
+        {
+            <p style="color:#aaa; text-align:center; margin-top:20px;">Enter a keyword above to search lost items.</p>
+        }
+
+    </div>
+
+</body>
+</html>

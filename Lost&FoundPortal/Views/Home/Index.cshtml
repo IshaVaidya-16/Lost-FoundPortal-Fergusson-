@@ -1,0 +1,211 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lost & Found Portal</title>
+
+    <link rel="stylesheet" href="~/css/home.css" />
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-box">
+
+            <div class="logo">
+                Lost & <span>Found</span>
+            </div>
+
+            <div class="menu">
+                <a href="#">Home</a>
+                <a href="/Home/Lost">Lost Property</a>
+                <a href="/Home/Found">Found Property</a>
+
+                @if (Context.Session.GetString("UserEmail") != null)
+                {
+                    <span style="color:white; align-self:center;">
+                        Hi, @Context.Session.GetString("UserName")
+                    </span>
+                    <a href="/Home/Logout" class="login-btn">Logout</a>
+                }
+                else
+                {
+                    <a href="/Home/Login" class="login-btn">Login</a>
+                }
+            </div>
+
+        </div>
+    </nav>
+
+
+    <div class="hero">
+        <div class="hero-bg"></div>
+
+        <div class="hero-text">
+            <h1>Lost Something? We've Got You!</h1>
+            <p>Your College Lost & Found Portal</p>
+            <a href="#" class="hero-btn" onclick="handleSearch(); return false;">Search Lost Items</a>
+        </div>
+    </div>
+
+    <div class="actions">
+        <h2>What Would You Like to Do?</h2>
+        <p class="subtext">Report a lost item or register something you found</p>
+
+        <div class="cards">
+
+            <div class="card">
+                <h4>Lost Something?</h4>
+                <p>Report your lost item with details and photos.</p>
+                <a href="/Home/Lost" class="btn red">Report Lost Item</a>
+            </div>
+
+            <div class="card">
+                <h4>Found Something?</h4>
+                <p>Register items so the owner can claim them.</p>
+                <a href="/Home/Found" class="btn dark">Register Found Item</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stats-box">
+
+            <div class="stat">
+                <h3>120+</h3>
+                <p>Items Recovered</p>
+            </div>
+
+            <div class="stat">
+                <h3>45</h3>
+                <p>Items Listed</p>
+            </div>
+
+            <div class="stat">
+                <h3>500+</h3>
+                <p>Students</p>
+            </div>
+
+            <div class="stat">
+                <h3>95%</h3>
+                <p>Success Rate</p>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="about">
+        <div class="about-box">
+
+            <div class="about-text">
+                <h2>About Our College</h2>
+                <div class="line"></div>
+                <p>Welcome to <strong>Fergusson College</strong>
+                one of the leading technical institutions in the region.
+                        Established in 1885, we are committed to providing quality
+                        education and a safe campus environment for all students.</p>
+                         <p>
+                       This <b>Lost & Found Portal</b> is an initiative by the Computer Science Department to help students and staff of the college recover their
+                        misplaced belongings quickly and efficiently.
+                    </p>
+                    <p>
+                        Items found on campus are handed to the security office
+                        and registered here. Students can search and claim their
+                        belongings by verifying their identity.
+                    </p>
+            </div>
+
+            <div class="about-info">
+                <h4> College Info</h4>
+
+                <p style="margin-top:20px">
+                    Fergusson College (Autonomous), Pune, Maharashtra - 411001.<br />
+                    <b>Contact us: +91 98765 43210 </b><br>
+                    <b>Email us:</b> lostandfound@fergussoncollege.edu.in.<br />
+                    <b>Office Hours: </b>Monday to Saturday, 9AM to 6PM.<br />
+                    All lost and found items are handled at the Security Office located on the Ground Floor, Main Building.
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="steps">
+        <h2>How It Works</h2>
+        <p class="subtext">Simple 3-step process</p>
+
+        <div class="step-box">
+
+            <div class="step">
+                <div class="num">1</div>
+                <h5>Login</h5>
+                <p>Create account</p>
+            </div>
+
+            <div class="step">
+                <div class="num">2</div>
+               
+                <h5>Report/Search</h5>
+                <p>Find item</p>
+            </div>
+
+            <div class="step">
+                <div class="num">3</div>
+                <h5>Claim</h5>
+                <p>Recover item</p>
+            </div>
+
+        </div>
+    </div>
+
+   
+    @if (Context.Session.GetString("UserEmail") == null)
+    {
+        <div id="loginPopup" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center;">
+            <div style="background:white; padding:40px; border-radius:12px; text-align:center; max-width:380px; width:90%; box-shadow:0 10px 40px rgba(0,0,0,0.3);">
+                <h3>🔒 Login Required</h3>
+                <p style="color:#555; margin:10px 0 24px;">You must be logged in to search lost items.</p>
+                <div style="display:flex; gap:12px; justify-content:center;">
+                    <a href="/Home/Login" style="padding:10px 24px; background:#e94560; color:white; border-radius:6px; text-decoration:none; font-weight:600;">Go to Login</a>
+                    <a href="#" onclick="closePopup()" style="padding:10px 24px; background:#eee; color:#333; border-radius:6px; text-decoration:none; font-weight:600;">Cancel</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    <script>
+            function handleSearch() {
+                @if (Context.Session.GetString("UserEmail") != null)
+                {
+                        <text>
+                            window.location.href = '/Home/Search';
+                        </text>
+                }
+                else
+                {
+                        <text>
+                            document.getElementById('loginPopup').style.display = 'flex';
+                        </text>
+                }
+            }
+
+            function closePopup() {
+                document.getElementById('loginPopup').style.display = 'none';
+            }
+
+            window.onclick = function (e) {
+                var popup = document.getElementById('loginPopup');
+                if (popup && e.target === popup) closePopup();
+            }
+    </script>
+</body>
+</html>

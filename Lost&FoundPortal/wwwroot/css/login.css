@@ -1,0 +1,79 @@
+﻿
+.login-page {
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.6), 
+    rgba(0,0,0,0.6)), 
+    url('/images/Fc-front.webp') center/cover;
+}
+
+.login-box {
+    background: white;
+    padding: 40px;
+    width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    height: auto;
+    margin-bottom: 0;
+}
+
+.login-box h2 
+{
+        margin-bottom: 10px;
+        color: #1a1a2e;
+}
+
+.login-box p 
+{
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+}
+
+.login-box input
+{
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+}
+
+
+
+    .login-box button {
+        width: 100%;
+        padding: 12px;
+        background: #e94560;
+        border: none;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top:10px;
+    }
+
+    .login-box button:hover 
+    {
+        background: #c73652;
+    }
+
+
+.register-text {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #555;
+}
+
+    .register-text a {
+        color: #e94560;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+       .register-text a:hover {
+            text-decoration: underline;
+        }

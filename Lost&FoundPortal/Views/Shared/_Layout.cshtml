@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Lost_FoundPortal</title>
+
+    <link rel="stylesheet" href="~/css/home.css?v=@DateTime.Now.Ticks" />
+    <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                margin: 0;
+            }
+
+            main
+            {
+                flex: 1;
+            }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer style="text-align:center; padding:15px; background:#0f0f1a; color:#aaa;">
+        &copy; 2026 - Lost_FoundPortal for Fergusson College.
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

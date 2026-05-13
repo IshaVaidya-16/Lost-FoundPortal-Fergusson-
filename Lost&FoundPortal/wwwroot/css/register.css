@@ -1,0 +1,65 @@
+﻿.register-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.6), 
+    rgba(0,0,0,0.6)),
+     url('/images/Fc-front.webp') center/cover;
+}
+
+
+.register-box {
+    background: white;
+    padding: 40px;
+    width: 500px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+    .register-box h2 {
+        margin-bottom: 15px;
+        color: #1a1a2e;
+    }
+
+    .register-box input,
+    .register-box select {
+        width: 80%;
+        padding: 12px;
+        margin: 12px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        font-size: 14px;
+    }
+
+        .register-box input:focus,
+        .register-box select:focus {
+            border-color: #e94560;
+        }
+
+    .register-box button {
+        width: 100%;
+        padding: 12px;
+        background: #e94560;
+        border: none;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 10px;
+        transition: 0.3s;
+    }
+
+        .register-box button:hover {
+            background: #c73652;
+        }
+
+    .register-box span {
+        color: red;
+        font-size: 12px;
+        display: block;
+        text-align: left;
+        margin-bottom: 5px;
+    }

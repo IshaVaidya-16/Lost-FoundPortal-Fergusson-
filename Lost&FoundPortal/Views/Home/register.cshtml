@@ -1,0 +1,73 @@
+﻿@using Lost_FoundPortal.Models
+@model Student
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="~/css/register.css" />
+</head>
+<body>
+
+    <div class="register-page">
+        <div class="register-box">
+
+            <h2>Student Registration</h2>
+
+            <form asp-action="Register" method="post">
+
+                <input asp-for="FullName" placeholder="Full Name" />
+                <span asp-validation-for="FullName"></span>
+
+                <input asp-for="Address" placeholder="Address" />
+                <span asp-validation-for="Address"></span>
+
+                <input asp-for="Email" placeholder="Email" />
+                <span asp-validation-for="Email"></span>
+
+                <input asp-for="Phone" placeholder="Phone Number" />
+                <span asp-validation-for="Phone"></span>
+
+                <input asp-for="RollNo" placeholder="Roll Number" />
+                <span asp-validation-for="RollNo"></span>
+
+                <select asp-for="Branch">
+                    <option value="">Select Branch</option>
+                    <option>Computer Science</option>
+                    <option>Physics</option>
+                    <option>Mathematics</option>
+                    <option>Media</option>
+                    <option>Law</option>
+                    <option>Chemistry</option>
+                    <option>Commerce</option>
+                    <option>Arts</option>
+                </select>
+                <span asp-validation-for="Branch"></span>
+
+                <select asp-for="Course">
+                    <option value="">Select Course</option>
+                    <option>11th</option>
+                    <option>12th</option>
+                    <option>BSc</option>
+                    <option>MSc</option>
+                </select>
+                <span asp-validation-for="Course"></span>
+
+                <input asp-for="Password" type="password" placeholder="Create Password" />
+                <span asp-validation-for="Password"></span>
+
+                <button type="submit">Register</button>
+
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>

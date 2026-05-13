@@ -1,0 +1,135 @@
+﻿@model List<Lost_FoundPortal.Models.LostItem>
+
+@{
+    ViewData["Title"] = "Lost";
+    bool isLoggedIn = ViewBag.IsLoggedIn ?? false;
+    int? currentUserId = Context.Session.GetInt32("UserId");
+    var users = ViewBag.Users as List<Lost_FoundPortal.Models.Student>;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title style="text-align:center">Lost Property</title>
+    <link rel="stylesheet" href="~/css/found.css?v=1" />
+</head>
+<body>
+
+    @if (!isLoggedIn)
+    {
+        <div id="loginPopup" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center;">
+            <div style="background:white; padding:40px; border-radius:12px; text-align:center; max-width:380px; width:90%; box-shadow:0 10px 40px rgba(0,0,0,0.3);">
+                <h3> Login Required</h3>
+                <p style="color:#555; margin:10px 0 24px;">You must be logged in to report a lost item.</p>
+                <div style="display:flex; gap:12px; justify-content:center;">
+                    <a href="/Home/Login" style="padding:10px 24px; background:#e94560; color:white; border-radius:6px; text-decoration:none; font-weight:600;">Go to Login</a>
+                    <a href="#" onclick="closePopup()" style="padding:10px 24px; background:#eee; color:#333; border-radius:6px; text-decoration:none; font-weight:600;">Cancel</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="topbar">
+        <h2>Lost Property</h2>
+        <a href="/Home/Index" class="back-btn">← Back</a>
+    </div>
+
+    @if (isLoggedIn)
+    {
+        <div class="form-box">
+            <h3>Report Lost Item</h3>
+            <form method="post" asp-action="Lost_Items" enctype="multipart/form-data">
+                <input type="text" name="ItemName" placeholder="Item Name" required />
+                <textarea name="Description" placeholder="Description"></textarea>
+                <input type="text" name="LocationLost" placeholder="Lost Location" />
+                <label style="font-size:13px; font-weight:600; color:#555; margin-top:10px; display:block;">
+                    Lost Date
+                </label>
+                <input type="date" name="DateLost" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <label style="font-size:13px; font-weight:600; color:#555; margin-top:10px; display:block;">
+                    Attach Image
+                </label>
+                <input type="file" name="ImageFile" />
+                <button type="submit">Submit Item</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="form-box" style="text-align:center;">
+            <h3>Report Lost Item</h3>
+            <p style="color:#888; margin-bottom:16px;">You need to be logged in to report a lost item.</p>
+            <button onclick="showPopup()">+ Report Lost Item</button>
+        </div>
+    }
+
+    <div class="list-box">
+        <h3>Lost Items</h3>
+
+        @if (Model?.Any() == true)
+        {
+            <div class="cards-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="card">
+
+                        @if (!string.IsNullOrEmpty(item.ImagePath))
+                        {
+                            <img src="@item.ImagePath" />
+                        }
+                        else
+                        {
+                            <img src="/images/default.jpg" />
+                        }
+
+                        <div>
+                            <h4>@item.ItemName</h4>
+                            <p>@item.Description</p>
+                            <p><b>Location:</b> @item.LocationLost</p>
+                            <p><b>Lost on:</b> @item.DateLost?.ToString("dd-MM-yyyy")</p>
+                            <p><b>Lost By:</b> @users?.FirstOrDefault(u => u.UserId == item.UserId)?.FullName</p>
+                            <p><b>Contact:</b> @users?.FirstOrDefault(u => u.UserId == item.UserId)?.Phone</p>
+                            <span class="status">@item.Status</span>
+
+                            @if (item.Status != "resolved" && item.UserId == currentUserId)
+                            {
+                                <form method="post" asp-action="ResolveLost">
+                                    <input type="hidden" name="id" value="@item.LostId" />
+                                    <button type="submit" class="btn">Mark Resolved</button>
+                                </form>
+                            }
+                            else if (item.Status == "resolved")
+                            {
+                                <span style="color:green; font-weight:bold;">Resolved ✔</span>
+                            }
+                        </div>
+
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No lost items found.</p>
+        }
+    </div>
+
+
+    <script>
+            function showPopup() {
+                var popup = document.getElementById('loginPopup');
+                popup.style.display = 'flex';
+            }
+            function closePopup() {
+                var popup = document.getElementById('loginPopup');
+                popup.style.display = 'none';
+            }
+            window.onclick = function(e) {
+                var popup = document.getElementById('loginPopup');
+                if (e.target === popup) closePopup();
+            }
+    </script>
+
+</body>
+</html>
